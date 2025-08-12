@@ -1,0 +1,39 @@
+{
+	"name": "telran-backend-hw2",
+	"version": "1.0.0",
+	"description": "Solution of homework #2 Tel-Ran backend course",
+	"main": "app.ts",
+	"directories": {
+		"test": "tests"
+	},
+	"scripts": {
+		"start": "tsx src/app.ts",
+		"build": "tsc",
+		"test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/malikinss/telran-backend-hw2.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"type": "module",
+	"bugs": {
+		"url": "https://github.com/malikinss/telran-backend-hw2/issues"
+	},
+	"homepage": "https://github.com/malikinss/telran-backend-hw2#readme",
+	"devDependencies": {
+		"@types/config": "^3.3.5",
+		"@types/jest": "^30.0.0",
+		"@types/node": "^24.2.1",
+		"jest": "^30.0.5",
+		"ts-jest": "^29.4.1",
+		"ts-node": "^10.9.2",
+		"tsx": "^4.20.3",
+		"typescript": "^5.9.2"
+	},
+	"dependencies": {
+		"config": "^4.1.0"
+	}
+}

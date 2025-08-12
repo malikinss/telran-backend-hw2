@@ -1,0 +1,3 @@
+//abcd is a variable of type number
+
+//constant lmn contains value 5

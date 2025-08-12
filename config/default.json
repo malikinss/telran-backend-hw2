@@ -1,0 +1,5 @@
+{
+	"inputFilePath": "./input/input.ts",
+	"outputCodeFilePath": "./output/code.ts",
+	"outputCommentFilePath": "./output/comments.txt"
+}
