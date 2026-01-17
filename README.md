@@ -1,134 +1,154 @@
 # Homework 2: Code and Comment Extractor 📝
 
-## Task Definition
+## 🧩 Task Definition
 
-```md
-HW#2 Comments and Code Separation
-Pathes to the files should be specified into configuration using "config" module
-Input file containing TS code and comments
-Assumed only comments of //
-examples:
-line with no comments - const abcd = 5;
-line with comment only - //abcd is a variable of type number
-line with code and comment const abcd = 5; //abcd is the variable with constant value 5
-Write application reading the input file and creating two output files
-Pathes of these files should be specified into configuration using "config" module
-First file should contain only code from the input file
-Second file should contain only comments from the input file
-example
-input file contains the following
-//abcd is a varible of type number
+The goal of this homework is to create a Node.js application that separates **TypeScript code** from **comments** in a given source file.
+
+The application must:
+
+- Read an input TypeScript file line-by-line.
+- Split each line into **code** and **comment** parts.
+- Write two separate output files:
+    - One containing only the code.
+    - One containing only the comments.
+- Support comments starting with `//` (single-line comments).
+
+### Example
+
+**Input file:**
+
+```ts
+//abcd is a variable of type number
 let abcd: number;
-const lmn = 5 //constant lmn contains value 5
+const lmn = 5; //constant lmn contains value 5
+```
 
-output file with code
+**Output code file:**
+
+```ts
 let abcd: number;
-const lmn = 5
+const lmn = 5;
+```
 
-output file with comments
-//abcd is a varible of type number
+**Output comment file:**
+
+```ts
+//abcd is a variable of type number
 //constant lmn contains value 5
 ```
 
-## Description 📝
-
-This is a `TypeScript`-based Node.js application that processes a text input file, extracting lines of code and comments separately.
-It reads a source file line-by-line, parses each line to split code from comments (lines starting with `//`), and writes the extracted code and comments into separate output files.
-
-The main logic is implemented in two modules:
-
--   `CommentParser` — responsible for parsing each line and extracting the comment part.
--   `FileHandler` — responsible for reading input files and writing results into output files.
-
-The project includes unit tests written with `Jest` to verify the functionality of these modules.
+Paths to the input and output files must be configured in the `config` module.
 
 ---
 
-## Purpose 🎯
+## 📝 Description
 
--   Practice file operations and streaming in Node.js
--   Work with line-by-line parsing using `readline`
--   Implement string processing and parsing logic in TypeScript
--   Gain experience setting up and running tests with `Jest` and `ts-jest`
--   Learn to configure a modern TypeScript project with ESM modules and proper imports
+This project is a **TypeScript Node.js application** designed to parse source files and extract comments and code into separate files.  
+It uses **asynchronous file reading** with Node.js streams and the `readline` module for line-by-line processing.
 
----
+The main modules are:
 
-## How It Works 🔍
+- `CommentParser` — responsible for splitting code and comments from each line.
+- `FileHandler` — responsible for reading input files and writing output files.
+- `config` — stores paths for input and output files.
 
--   The app reads the input file line-by-line asynchronously.
--   Each line is processed by `CommentParser.extractCodeAndComments()` which splits the line into `code` and `comment` parts.
--   These parts are collected into separate arrays.
--   The arrays are written to two different output files: one for code, one for comments.
--   Logging is done during processing to track progress and any errors.
+The project also includes **unit tests** with `Jest` to ensure the parsing logic works correctly.
 
 ---
 
-## Output 📜
+## 🎯 Purpose
 
-Given an input file with lines like:
+This project helps to:
 
-```js
+- Practice **file handling** and **stream processing** in Node.js.
+- Learn **line-by-line parsing** using `readline`.
+- Apply **string manipulation** and parsing logic in TypeScript.
+- Set up a modern TypeScript project with **ESM modules**.
+- Configure and run **unit tests** with `Jest` and `ts-jest`.
+
+---
+
+## 🔍 How It Works
+
+1. The application reads the input file **asynchronously**.
+2. Each line is sent to `CommentParser.extractCodeAndComments()`:
+    - Lines starting with `//` are considered **comments only**.
+    - Lines containing both code and comment are split at the first occurrence of `//`.
+    - Lines without `//` are treated as **code only**.
+3. Extracted **code lines** and **comment lines** are collected in arrays.
+4. `FileHandler` writes these arrays into separate files defined in the configuration.
+5. Logging is performed for process tracking and error handling.
+
+---
+
+## 📜 Output Example
+
+Input file:
+
+```ts
 const x = 5; // это переменная
 let y = 10;
 // комментарий
 ```
 
-The app will produce two output files:
+**Generated output files:**
 
--   **Code output file:**
+- **Code output file:**
 
-```
+```ts
 const x = 5;
 let y = 10;
-
 ```
 
--   **Comment output file:**
+- **Comment output file:**
 
-```
+```ts
 // это переменная
-
 // комментарий
 ```
 
 ---
 
-## Usage 📦
+## 📦 Usage
 
-1. Clone the repository or download the project folder.
+1. Clone the repository:
+
+```bash
+git clone <repo-url>
+cd HW2
+```
 
 2. Install dependencies:
 
-    ```bash
-    npm install
-    ```
+```bash
+npm install
+```
 
-3. Configure your file paths in `config/default.json` (create if missing), e.g.:
+3. Configure file paths in `config/default.json`:
 
-    ```json
-    {
-    	"inputFilePath": "./input.txt",
-    	"outputCodeFilePath": "./output_code.txt",
-    	"outputCommentFilePath": "./output_comments.txt"
-    }
-    ```
+```json
+{
+	"inputFilePath": "./input.txt",
+	"outputCodeFilePath": "./output_code.txt",
+	"outputCommentFilePath": "./output_comments.txt"
+}
+```
 
 4. Run the application:
 
-    ```bash
-    npm start
-    ```
+```bash
+npm start
+```
 
 5. Run tests:
 
-    ```bash
-    npm test
-    ```
+```bash
+npm test
+```
 
 ---
 
-## Project Structure 🗂
+## 🗂 Project Structure
 
 ```
 HW2/
@@ -136,7 +156,7 @@ HW2/
 ├── src/
 │   ├── app.ts                 # Main application entry point
 │   ├── parser/
-│   │   └── CommentParser.ts  # Logic to extract code and comments from a line
+│   │   └── CommentParser.ts  # Logic for extracting code and comments
 │   └── utils/
 │       └── FileHandler.ts    # File reading/writing utilities
 │
@@ -155,16 +175,42 @@ HW2/
 
 ---
 
-## Conclusion 🚀
+## 🧪 Testing
 
-This project helps to:
+Unit tests verify:
 
--   Get familiar with asynchronous file handling in Node.js
--   Practice parsing and string manipulation in TypeScript
--   Set up a modern test environment with Jest and TypeScript ESM support
--   Understand project organization and configuration for real-world Node.js apps
+- Correct splitting of code and comments in all scenarios:
+    - Comment-only lines
+    - Code-only lines
+    - Lines with code and inline comments
+- Correct handling of empty lines
+- Proper writing of output files
+
+Run tests with:
+
+```bash
+npm test
+```
 
 ---
 
-Made with ❤️ and `TypeScript`
-By \[your name or GitHub handle]
+## ✅ Dependencies
+
+- Node.js 18+
+- TypeScript
+- Jest (`ts-jest`)
+
+---
+
+## 🚀 Conclusion
+
+This project demonstrates:
+
+- Asynchronous file reading and writing in Node.js
+- Line-by-line parsing and string manipulation in TypeScript
+- Separation of code and comments for analysis or documentation purposes
+- Unit testing with Jest in a TypeScript environment
+
+---
+
+Made with ❤️ and TypeScript by Sam-Shepsl Malikin
